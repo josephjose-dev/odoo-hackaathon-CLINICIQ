@@ -1,0 +1,25 @@
+{
+    "name": "ClinicIQ",
+    "version": "1.0",
+    "summary": "Intelligent Clinic Operations and Patient Care System",
+    "description": "Smart clinic management with risk scoring, slot optimization, and automated follow-ups.",
+    "category": "Healthcare",
+    "author": "ClinicIQ Team",
+    "depends": ["base", "mail"],
+    "application": True,
+    "data": [
+        "security/ir.model.access.csv",
+        "data/clinic_sequences.xml",
+        "data/clinic_cron.xml",
+        "views/clinic_condition_views.xml",
+        "views/clinic_allergy_views.xml",
+        "views/clinic_medicine_views.xml",
+        "views/clinic_patient_views.xml",
+        "views/clinic_appointment_views.xml",
+        "views/clinic_prescription_views.xml",
+        "views/clinic_menus.xml",
+    ],
+    "demo": [
+        "data/clinic_demo.xml",
+    ],
+}

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ── List View ── -->
+    <record id="clinic_appointment_view_list" model="ir.ui.view">
+        <field name="name">clinic.appointment.list</field>
+        <field name="model">clinic.appointment</field>
+        <field name="arch" type="xml">
+            <list string="Appointments"
+                  decoration-danger="state == 'missed'"
+                  decoration-success="state == 'done'"
+                  decoration-warning="no_show_probability &gt;= 40"
+                  decoration-muted="state == 'cancelled'">
+                <field name="name"/>
+                <field name="patient_id"/>
+                <field name="doctor_name"/>
+                <field name="appointment_date"/>
+                <field name="appointment_type"/>
+                <field name="no_show_probability" string="No-Show Risk %"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- ── Form View ── -->
+    <record id="clinic_appointment_view_form" model="ir.ui.view">
+        <field name="name">clinic.appointment.form</field>
+        <field name="model">clinic.appointment</field>
+        <field name="arch" type="xml">
+            <form string="Appointment">
+                <header>
+                    <button name="action_confirm"
+                            string="Confirm"
+                            type="object"
+                            class="btn-primary"
+                            invisible="state != 'scheduled'"/>
+                    <button name="action_done"
+                            string="Mark Done"
+                            type="object"
+                            class="btn-success"
+                            invisible="state not in ('scheduled', 'confirmed')"/>
+                    <button name="action_missed"
+                            string="Mark Missed"
+                            type="object"
+                            invisible="state not in ('scheduled', 'confirmed')"/>
+                    <button name="action_cancel"
+                            string="Cancel"
+                            type="object"
+                            invisible="state in ('done', 'cancelled')"/>
+                    <field name="state"
+                           widget="statusbar"
+                           statusbar_visible="scheduled,confirmed,done"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="Appointment Details">
+                            <field name="patient_id"/>
+                            <field name="doctor_name"/>
+                            <field name="appointment_date"/>
+                            <field name="appointment_time" widget="float_time"/>
+                            <field name="appointment_type"/>
+                        </group>
+                        <group string="Smart Insights">
+                            <field name="no_show_probability"/>
+                        </group>
+                    </group>
+                    <field name="notes" placeholder="Doctor notes..."/>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- ── Action ── -->
+    <record id="action_clinic_appointment" model="ir.actions.act_window">
+        <field name="name">Appointments</field>
+        <field name="res_model">clinic.appointment</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+</odoo>

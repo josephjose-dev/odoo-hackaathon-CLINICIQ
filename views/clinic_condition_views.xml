@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="clinic_condition_view_list" model="ir.ui.view">
+        <field name="name">clinic.condition.list</field>
+        <field name="model">clinic.condition</field>
+        <field name="arch" type="xml">
+            <list string="Chronic Conditions">
+                <field name="name"/>
+                <field name="severity"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="clinic_condition_view_form" model="ir.ui.view">
+        <field name="name">clinic.condition.form</field>
+        <field name="model">clinic.condition</field>
+        <field name="arch" type="xml">
+            <form string="Condition">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="severity"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_clinic_condition" model="ir.actions.act_window">
+        <field name="name">Conditions</field>
+        <field name="res_model">clinic.condition</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+</odoo>

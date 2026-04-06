@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Root Menu -->
+    <menuitem id="menu_cliniciq_root"
+              name="ClinicIQ"
+              sequence="10"/>
+
+    <!-- Patients -->
+    <menuitem id="menu_cliniciq_patients"
+              name="Patients"
+              parent="menu_cliniciq_root"
+              sequence="10"/>
+    <menuitem id="menu_cliniciq_patient_list"
+              name="All Patients"
+              parent="menu_cliniciq_patients"
+              action="action_clinic_patient"
+              sequence="10"/>
+
+    <!-- Appointments -->
+    <menuitem id="menu_cliniciq_appointments"
+              name="Appointments"
+              parent="menu_cliniciq_root"
+              sequence="20"/>
+    <menuitem id="menu_cliniciq_appointment_list"
+              name="All Appointments"
+              parent="menu_cliniciq_appointments"
+              action="action_clinic_appointment"
+              sequence="10"/>
+
+    <!-- Prescriptions -->
+    <menuitem id="menu_cliniciq_prescriptions"
+              name="Prescriptions"
+              parent="menu_cliniciq_root"
+              sequence="30"/>
+    <menuitem id="menu_cliniciq_prescription_list"
+              name="All Prescriptions"
+              parent="menu_cliniciq_prescriptions"
+              action="action_clinic_prescription"
+              sequence="10"/>
+
+    <!-- Configuration -->
+    <menuitem id="menu_cliniciq_config"
+              name="Configuration"
+              parent="menu_cliniciq_root"
+              sequence="99"/>
+    <menuitem id="menu_cliniciq_conditions"
+              name="Chronic Conditions"
+              parent="menu_cliniciq_config"
+              action="action_clinic_condition"
+              sequence="10"/>
+    <menuitem id="menu_cliniciq_allergies"
+              name="Allergies"
+              parent="menu_cliniciq_config"
+              action="action_clinic_allergy"
+              sequence="20"/>
+    <menuitem id="menu_cliniciq_medicines"
+              name="Medicines"
+              parent="menu_cliniciq_config"
+              action="action_clinic_medicine"
+              sequence="30"/>
+
+</odoo>

@@ -1,0 +1,8 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+access_clinic_patient,access_clinic_patient,model_clinic_patient,base.group_user,1,1,1,1
+access_clinic_appointment,access_clinic_appointment,model_clinic_appointment,base.group_user,1,1,1,1
+access_clinic_prescription,access_clinic_prescription,model_clinic_prescription,base.group_user,1,1,1,1
+access_clinic_prescription_line,access_clinic_prescription_line,model_clinic_prescription_line,base.group_user,1,1,1,1
+access_clinic_condition,access_clinic_condition,model_clinic_condition,base.group_user,1,1,1,1
+access_clinic_allergy,access_clinic_allergy,model_clinic_allergy,base.group_user,1,1,1,1
+access_clinic_medicine,access_clinic_medicine,model_clinic_medicine,base.group_user,1,1,1,1

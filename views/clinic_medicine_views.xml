@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="clinic_medicine_view_list" model="ir.ui.view">
+        <field name="name">clinic.medicine.list</field>
+        <field name="model">clinic.medicine</field>
+        <field name="arch" type="xml">
+            <list string="Medicines">
+                <field name="name"/>
+                <field name="category"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="clinic_medicine_view_form" model="ir.ui.view">
+        <field name="name">clinic.medicine.form</field>
+        <field name="model">clinic.medicine</field>
+        <field name="arch" type="xml">
+            <form string="Medicine">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="category"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_clinic_medicine" model="ir.actions.act_window">
+        <field name="name">Medicines</field>
+        <field name="res_model">clinic.medicine</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+</odoo>

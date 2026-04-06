@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="ir_cron_clinic_flag_critical" model="ir.cron">
+        <field name="name">ClinicIQ: Flag Critical Patients Nightly</field>
+        <field name="model_id" ref="model_clinic_patient"/>
+        <field name="state">code</field>
+        <field name="code">model.action_cron_flag_critical()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="active">True</field>
+    </record>
+
+    <record id="ir_cron_clinic_mark_missed" model="ir.cron">
+        <field name="name">ClinicIQ: Auto-Mark Missed Appointments</field>
+        <field name="model_id" ref="model_clinic_appointment"/>
+        <field name="state">code</field>
+        <field name="code">model.action_cron_mark_missed()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="active">True</field>
+    </record>
+
+</odoo>
