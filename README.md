@@ -10,7 +10,9 @@ Developed under the theme: **Public & Institutional ERP**.
 
 ## What is ClinicIQ?
 
-ClinicIQ is an Odoo module that unifies patient care, clinical administration, and institutional intelligence into a single platform. It does not just track patients — it automatically scores their risk, flags critical cases before doctors arrive, and blocks dangerous prescriptions in real time.
+ClinicIQ is an Odoo module that unifies patient care, clinical administration, and institutional intelligence into a single platform.
+
+It does not just track patients — it automatically scores their risk, flags critical cases before doctors arrive, and blocks dangerous prescriptions in real time.
 
 > Built for public health institutions where speed, accuracy, and safety are non-negotiable.
 
@@ -19,133 +21,144 @@ ClinicIQ is an Odoo module that unifies patient care, clinical administration, a
 ## Features
 
 ### 1. 🔢 Auto Risk Score Engine
-- Every patient receives a risk score from **0–100** computed automatically
-- Formula weighs: age + severity of chronic conditions + missed appointments + days since last visit
-- Conditions are severity-weighted: Severe = 15pts · Moderate = 10pts · Mild = 5pts
-- Score updates in real time as patient data changes
 
-| Score Range | Risk Level |
-|---|---|
-| 70–100 | 🔴 Critical |
-| 45–69 | 🟠 High |
-| 25–44 | 🟡 Moderate |
-| 0–24 | 🟢 Low |
+* Every patient receives a risk score from **0–100** computed automatically
+* Formula weighs:
+
+  * Age
+  * Severity of chronic conditions
+  * Missed appointments
+  * Days since last visit
+* Conditions are severity-weighted:
+
+  * Severe = 15 pts
+  * Moderate = 10 pts
+  * Mild = 5 pts
+* Score updates in real time as patient data changes
+
+| Score Range | Risk Level  |
+| ----------- | ----------- |
+| 70–100      | 🔴 Critical |
+| 45–69       | 🟠 High     |
+| 25–44       | 🟡 Moderate |
+| 0–24        | 🟢 Low      |
 
 ---
 
 ### 2. 🌙 Nightly Critical Flagging (Cron Job)
-- Automated job runs every night at **midnight**
-- Scans all active patients with risk score ≥ 70
-- Automatically sets their state to **Critical**
-- Posts a chatter message as a full audit trail
-- Doctors arrive to a **pre-triaged patient list** every morning — zero manual effort
+
+* Automated job runs every night at **midnight**
+* Scans all active patients with risk score ≥ 70
+* Automatically sets their state to **Critical**
+* Posts a chatter message as a full audit trail
+* Doctors arrive to a pre-triaged patient list every morning
 
 ---
 
 ### 3. 🚨 Real-Time Allergy Conflict Detector
-- When a prescription is issued, the system checks every medicine against the patient's known allergies
-- Raises a hard `ValidationError` if a conflict is detected
-- Prescription **cannot be issued** until the conflict is resolved
-- Protects patients from dangerous prescriptions in real time
+
+* Checks prescribed medicines against patient allergies
+* Raises a hard `ValidationError` if a conflict is detected
+* Prescription **cannot be issued** until resolved
+* Prevents dangerous prescriptions in real time
 
 ---
 
 ### 4. 📊 No-Show Probability Predictor
-- Every appointment gets an automatic **no-show probability score** (0–95%)
-- Based on the patient's history of missed appointments and appointment type
-- Emergency appointments score lower · Routine checkups score higher
-- Helps clinics manage scheduling and send targeted reminders
+
+* Every appointment receives an automatic no-show probability score (**0–95%**)
+* Based on:
+
+  * Missed appointment history
+  * Appointment type
+* Emergency appointments score lower
+* Routine appointments score higher
+* Helps clinics optimise scheduling and reminders
 
 ---
 
 ### 5. ⏰ Overdue Checkup Flag
-- Patients who haven't visited in over **90 days** are automatically flagged
-- Visible in both the patient form and list view
-- Helps clinics proactively follow up with patients who go silent
+
+* Patients with no visits in over **90 days** are automatically flagged
+* Visible in patient forms and list views
+* Encourages proactive follow-up
 
 ---
 
 ### 6. 📋 Full Audit Trail (Chatter)
-- Every change is automatically logged — conditions added, risk score changes, prescription blocks
-- Who changed what and when — zero manual effort
-- Legally essential for public health institutions
+
+* Every important action is automatically logged
+* Tracks:
+
+  * Condition updates
+  * Risk score changes
+  * Prescription blocks
+  * Critical status updates
+* Records who made the change and when
 
 ---
 
 ## Data Models
 
-| Model | Description |
-|---|---|
-| `clinic.patient` | Main patient record with risk engine |
-| `clinic.appointment` | Appointments with no-show predictor |
-| `clinic.prescription` | Prescriptions with allergy conflict detection |
-| `clinic.prescription.line` | Individual medicine lines per prescription |
-| `clinic.condition` | Chronic conditions lookup with severity weights |
-| `clinic.allergy` | Allergies lookup table |
-| `clinic.medicine` | Medicines lookup table |
+| Model                      | Description                                     |
+| -------------------------- | ----------------------------------------------- |
+| `clinic.patient`           | Main patient record with risk engine            |
+| `clinic.appointment`       | Appointments with no-show predictor             |
+| `clinic.prescription`      | Prescriptions with allergy conflict detection   |
+| `clinic.prescription.line` | Individual medicine lines                       |
+| `clinic.condition`         | Chronic conditions lookup with severity weights |
+| `clinic.allergy`           | Allergies lookup table                          |
+| `clinic.medicine`          | Medicines lookup table                          |
 
 ---
 
 ## Demo Patients
 
-| Patient | Age | Conditions | Risk Score | Level |
-|---|---|---|---|---|
-| Yousef Al-Amin | 71 | Heart Failure, CKD, Hypertension | 80+ | 🔴 Critical |
-| Ahmed Al-Rashid | 58 | Diabetes, Hypertension, Obesity | 80+ | 🔴 Critical |
-| Sara Mohammed | 34 | Asthma | ~37 | 🟡 Moderate |
-| Nour Al-Zahra | 28 | None | ~14 | 🟢 Low |
+| Patient         | Age | Conditions                       | Risk Score | Level       |
+| --------------- | --- | -------------------------------- | ---------- | ----------- |
+| Yousef Al-Amin  | 71  | Heart Failure, CKD, Hypertension | 80+        | 🔴 Critical |
+| Ahmed Al-Rashid | 58  | Diabetes, Hypertension, Obesity  | 80+        | 🔴 Critical |
+| Sara Mohammed   | 34  | Asthma                           | ~37        | 🟡 Moderate |
+| Nour Al-Zahra   | 28  | None                             | ~14        | 🟢 Low      |
 
 ---
 
-## Installation
-
-### Requirements
-- Python 3.10+
-- Odoo 19
-- PostgreSQL 12+
-
-### Setup Steps
-
-**1. Clone the repository**
-```bash
-git clone https://github.com/YOUR_USERNAME/cliniciq.git
-```
-
-**2. Place the module in your Odoo addons path**
-```bash
-cp -r cliniciq /path/to/odoo/addons/
-```
-
-**3. Restart Odoo and update the app list**
-```bash
-./odoo-bin -c odoo.conf -u clinic_iq
-```
-
-**4. Install from the Apps menu**
-- Go to Apps → Search "ClinicIQ" → Install
 
 ---
 
 ## Tech Stack
 
-| Layer | Technology |
-|---|---|
-| Platform | Odoo 19 (Community) |
-| Backend | Python 3.10 |
-| ORM | Odoo ORM (PostgreSQL) |
-| Automation | Odoo Scheduled Actions (Cron) |
-| UI | Odoo Views (XML) — Form, List, Kanban |
-| Validation | Python `ValidationError` |
-
----
----
-
-## Award
-
-This project was awarded **Most Promising Idea** at the **Odoo Buildathon 2026**, BITS Pilani Dubai Campus (March 27 – April 7, 2026), conducted in collaboration with ACM BPDC, Microsoft Tech Club, and Google Developer Group.
+| Layer      | Technology                          |
+| ---------- | ----------------------------------- |
+| Platform   | Odoo 19 (Community Edition)         |
+| Backend    | Python 3.10                         |
+| ORM        | Odoo ORM (PostgreSQL)               |
+| Automation | Odoo Scheduled Actions (Cron Jobs)  |
+| UI         | Odoo XML Views (Form, List, Kanban) |
+| Validation | Python `ValidationError`            |
 
 ---
 
-## License
+## 🏆 Awards & Recognition
 
-MIT License — feel free to build on this.
+ClinicIQ was awarded **Most Promising Idea** at the **Odoo Buildathon 2026**, hosted at **BITS Pilani Dubai Campus**.
+
+The event was conducted as a **multi-university competition** in collaboration with:
+
+* ACM BPDC
+* Microsoft Tech Club
+* Google Developer Group
+
+### Certificate:
+
+* 📜 Most Promising Idea Certificate
+
+Certificates can be found in the ROOT folders of this repository.
+
+---
+
+## Project Vision
+
+ClinicIQ demonstrates how healthcare ERP systems can evolve beyond record keeping into intelligent assistants that improve safety, efficiency, and patient outcomes.
+
+By embedding automation and decision support directly into clinical workflows, institutions can deliver faster, safer, and more proactive care.
